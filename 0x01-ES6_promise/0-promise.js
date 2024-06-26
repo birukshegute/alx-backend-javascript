@@ -1,4 +1,4 @@
-export default function getResponseFromAPI(){
+function getResponseFromAPI(){
     return new Promise((resolve, reject) => {
         /*eslint-disable */
         if (true) {
@@ -9,3 +9,5 @@ export default function getResponseFromAPI(){
         /* eslint-enable */
       });
 }
+
+export default getResponseFromAPI()
