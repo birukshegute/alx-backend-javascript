@@ -10,4 +10,4 @@ function getResponseFromAPI(){
       });
 }
 
-export default getResponseFromAPI()
+export default getResponseFromAPI;
