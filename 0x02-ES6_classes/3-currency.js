@@ -11,7 +11,7 @@ export default class Currency {
   set code(code) {
     if (typeof code === 'string') this._code = code;
   }
-  
+
   get name() {
     return this._name;
   }
