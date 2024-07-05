@@ -1,3 +1,3 @@
-export default function getListStudentIds(Array){
-  return Array.map(items => items.id)
+export default function getListStudentIds(array){
+  return array.map(items => items.id)
 }
