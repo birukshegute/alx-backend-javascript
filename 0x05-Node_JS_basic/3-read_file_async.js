@@ -29,7 +29,7 @@ const countStudents = (filePath) => new Promise((resolve, reject) => {
       console.log(`Number of students in ${field}: ${group.length}. List: ${names}`);
     });
 
-    resolve(true);
+    return resolve(true);
   });
 });
 

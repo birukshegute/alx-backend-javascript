@@ -6,17 +6,27 @@ const port = 1245;
 const dbFile = process.argv[2] || '';
 
 const countData = (filePath) => new Promise((resolve, reject) => {
-  if (!filePath) return reject(new Error('Cannot load the database'));
+  if (!filePath) {
+    return reject(new Error('Cannot load the database'));
+  }
 
   fs.readFile(filePath, 'utf-8', (err, data) => {
-    if (err) return reject(new Error('Cannot load the database'));
+    if (err) {
+      return reject(new Error('Cannot load the database'));
+    }
 
     const [headers, ...lines] = data.trim().split('\n');
+    if (!headers) {
+      return reject(new Error('Cannot load the database'));
+    }
+
     const fields = headers.split(',').slice(0, -1);
     const groups = lines.reduce((acc, line) => {
-      const [props, field] = [line.split(','), line.split(',').pop()];
-      if (!acc[field]) acc[field] = [];
-      acc[field].push(Object.fromEntries(fields.map((key, i) => [key, props[i]])));
+      if (line) {
+        const [props, field] = [line.split(','), line.split(',').pop()];
+        if (!acc[field]) acc[field] = [];
+        acc[field].push(Object.fromEntries(fields.map((key, i) => [key, props[i]])));
+      }
       return acc;
     }, {});
 
@@ -27,7 +37,7 @@ const countData = (filePath) => new Promise((resolve, reject) => {
       report.push(`Number of students in ${field}: ${grp.length}. List: ${names}`);
     }
 
-    resolve(report.join('\n'));
+    return resolve(report.join('\n'));
   });
 });
 
