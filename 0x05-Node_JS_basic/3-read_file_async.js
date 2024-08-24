@@ -1,6 +1,5 @@
 const fs = require('fs');
 
-
 const countStudents = (filePath) => new Promise((resolve, reject) => {
   fs.readFile(filePath, 'utf-8', (err, data) => {
     if (err) {
@@ -17,7 +16,9 @@ const countStudents = (filePath) => new Promise((resolve, reject) => {
       if (!students[field]) {
         students[field] = [];
       }
-      const student = Object.fromEntries(headers.slice(0, -1).map((key, index) => [key, values[index]]));
+      const pairs = headers.slice(0, -1)
+        .map((key, index) => [key, values[index]]);
+      const student = Object.fromEntries(pairs);
       students[field].push(student);
     });
 
